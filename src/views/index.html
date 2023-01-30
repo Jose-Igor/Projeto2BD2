@@ -5,16 +5,152 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body{
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    .capa{
+        background-color: #00be9e;
+        color: aliceblue;
+        text-align: left;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .menu{
+        list-style:none;
+        font-size: 26px;
+        border:1px solid #00be9e;
+    }
+
+    .menu li{
+        position:relative;
+        float:left;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .menu li a{
+        text-decoration:none;
+        display:block;
+        color: aliceblue;    
+        background-color: #58287a;
+        border: 1px solid black;
+    }
+
+    .menu li a:hover{
+        background: rgb(0, 110, 255);
+    }
+
+    #este{
+        background: rgb(0, 110, 255);
+    }
+
+    input{
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+    }
+
+    input:focus{
+        border: 3px solid #555;
+    }
+
+    textarea{
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        resize: none;
+    }
+
+    input[type=button], input[type=submit], button{
+        background-color: #04AA6D;
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-decoration: none;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+
+    label{
+        font-size: 16px;
+    }
+
+    #frase{
+        color: red;
+    }
+    </style>
 </head>
 <body>
-    <form action="/anotacao" method="post">
+   
+    <div class="capa">
+        <h1>Anotações Pessoais</h1>
+        <h2>Digite o título e a anotação depois pressione enviar.</h2>
+        <ul class="menu">
+            <li><a href="#" id="este">Criar</a></li>
+            <li><a href="/listar">Listar</a></li>
+    </div>
+    <br><br><br>
+    <div>
+        <form action="/anotacao" method="post" id="formulario">
+    
+            <label>Titulo</label>
+            <input type="text" name="title" id="titulo">
+            <label>Conteudo</label>
+            <textarea name="content" id="conteudo" cols="30" rows="10"></textarea>
+            <button>Enviar</button>
+    
+        </form>
+    </div>
+    
+    <script>
+        const formulario = document.getElementById("formulario");
+        const titulo = document.getElementById("titulo");
+        const conteudo= document.getElementById("conteudo");
+        let mensagemCriada = false;
 
-        <label>Titulo</label>
-        <input type="text" name="title">
-        <label>Conteudo</label>
-        <textarea name="content" id="" cols="30" rows="10"></textarea>
-        <button>Enviar</button>
 
-    </form>
+        formulario.addEventListener("submit",(evt)=>{
+            evt.preventDefault();
+
+            const title = titulo.value;
+            const content = conteudo.value;
+
+            fetch("/anotacao", {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ title, content })
+            })
+            .then((response) => response.json())
+            .then((data) => console.log(data));
+
+            titulo.value = "";
+            conteudo.value = "";
+
+            if(!mensagemCriada){
+                criarMensagem();
+            }
+        })
+
+        function criarMensagem(){
+            const mensagem =  document.createElement("p");
+            mensagem.setAttribute("id","frase");
+           
+            mensagem.innerHTML = "Anotação criada com sucesso."
+            
+
+            document.body.appendChild(mensagem);
+            mensagemCriada = true;
+
+        }
+
+    </script>
+
 </body>
 </html>
