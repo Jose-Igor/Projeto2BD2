@@ -192,6 +192,53 @@
         //     })
         // }
   
+        //listar tudo
+        function gerarLista(){
+
+            main.innerHTML ="";
+
+            fetch("/listarAll").then((resposta)=>{
+                return resposta.json();
+            }).then(res=>{
+                res.map((el)=>{
+                    gerarAnotacao(el);
+                    btn_listar.removeEventListener("click",gerarLista);
+                })
+            }).then(()=>{
+                const formDelete = [...document.querySelectorAll(".formDelete")];
+
+                formDelete.forEach(el => {
+                    el.addEventListener("submit", event => {
+                        event.preventDefault();
+
+                        const id = event.target.previousSibling.innerHTML;
+
+                        fetch("/anotacao", {
+                        method: "DELETE",
+                        headers: {
+                        "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ id })
+                        })
+                        .then((response) => response.json())
+                        .then((data) => console.log(data));
+
+                        while(main.firstChild){
+                            main.removeChild(main.firstChild);
+                        }
+                        
+                        btn_listar.addEventListener("click",gerarLista);
+                        
+                    });
+                });
+
+                
+
+            })
+            
+        }
+
+        
       </script>
 </body>
 </html>
