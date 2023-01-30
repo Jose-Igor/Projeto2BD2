@@ -151,6 +151,46 @@
         btn_pesquisar.addEventListener("click",gerarPesquisa);
 
         btn_atualizar.addEventListener("click",atualizar);
+        
+                // //deletar
+        //  function criarForm(){
+
+        //     const form = document.createElement("form");
+        //     form.setAttribute("class","form1");
+
+        //     document.body.appendChild(form);
+
+        //     const label = document.createElement("label");
+        //     label.innerHTML = "Informe o ID do título";
+        //     form.appendChild(label);
+
+        //     const input = document.createElement("input");
+        //     input.setAttribute("type","text");
+        //     input.setAttribute("name","id");
+        //     input.setAttribute("value","");
+        //     form.appendChild(input);
+
+        //     form.appendChild(btn_deletar);
+
+        //     btn_deletar.removeEventListener("click",criarForm);
+
+        //     form.addEventListener("submit",(evt)=>{
+        //         evt.preventDefault();
+
+        //         const id = input.value;
+
+        //         fetch("/anotacao", {
+        //         method: "DELETE",
+        //         headers: {
+        //         "Content-Type": "application/json"
+        //         },
+        //         body: JSON.stringify({ id })
+        //         })
+        //         .then((response) => response.json())
+        //         .then((data) => console.log(data));
+                
+        //     })
+        // }
   
       </script>
 </body>
