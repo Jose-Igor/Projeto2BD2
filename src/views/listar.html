@@ -237,6 +237,39 @@
             })
             
         }
+        
+        //gerar quadrinhos
+        function gerarAnotacao(el){
+
+            const div = document.createElement("div");
+            div.setAttribute("class","anotacao");
+            main.appendChild(div);
+
+            const p1 = document.createElement("p");
+            p1.innerHTML = el.title;
+
+            div.appendChild(p1);
+
+            const p2 = document.createElement("p");
+            p2.innerHTML =  `Text:<br> ${el.content}`;
+
+            div.appendChild(p2);
+
+            const p3 = document.createElement("p");
+            p3.setAttribute("id","id");
+            p3.innerHTML = el._id;
+            div.appendChild(p3);
+
+            const form = document.createElement("form");
+            form.setAttribute("class","formDelete");
+            div.appendChild(form);
+
+            const btn_deletar = document.createElement("button");
+            btn_deletar.classList.add("btn_deletar")
+            btn_deletar.innerHTML = "Delete";
+            form.appendChild(btn_deletar);
+
+        }
 
         
       </script>
