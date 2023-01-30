@@ -328,6 +328,85 @@
         })
             
     }
+        //funcao updated
+        function atualizar(){
+
+        btn_listar.addEventListener("click",gerarLista);
+
+        while(main.firstChild){
+                main.removeChild(main.firstChild);
+        }
+
+        
+        const form = document.createElement("form");
+        form.setAttribute("class","formPesquisa");
+        main.appendChild(form);
+
+            const labelId = document.createElement("label");
+            labelId.innerHTML = "id";
+            form.appendChild(labelId);
+
+            const inputId = document.createElement("input");
+            inputId.setAttribute("type","text");
+            inputId.setAttribute("name","id");
+            inputId.setAttribute("id","titulo");
+            form.appendChild(inputId);
+
+            const label = document.createElement("label");
+            label.innerHTML = "Titulo";
+            form.appendChild(label);
+
+            const input = document.createElement("input");
+            input.setAttribute("type","text");
+            input.setAttribute("name","title");
+            input.setAttribute("id","titulo");
+            form.appendChild(input);
+
+      const labelTextArea = document.createElement("label");
+      labelTextArea.innerHTML = "Conteudo";
+
+      form.appendChild(labelTextArea);
+
+        const textarea = document.createElement("textarea");
+        textarea.setAttribute("name","content");
+        textarea.setAttribute("id","conteudo");
+        textarea.setAttribute("cols","30");
+        textarea.setAttribute("rows","10");
+        form.appendChild(textarea);
+
+
+        const btn = document.createElement("button");
+        btn.innerHTML="Enviar";
+
+        form.appendChild(btn);
+
+        form.addEventListener("submit",(evt)=>{
+            evt.preventDefault();
+
+            const id = inputId.value;
+            const title = input.value;
+            const content = textarea.value;
+            
+
+            fetch("/anotacao", {
+                method: "PUT",
+                headers: {
+                "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ id,title, content })
+            })
+            .then((response) => response.json())
+            .then((data) => console.log(data));
+
+            inputId .value="";
+            input.value = "";
+            textarea.value = "";
+
+        })
+
+
+    
+    }
         
       </script>
 </body>
