@@ -140,6 +140,17 @@
     <div id="main"></div>
 
     <script>
+        
+        const btn_listar  = document.getElementById("btn_listar");
+        const btn_pesquisar  = document.getElementById("btn_pesquisar");
+        const btn_atualizar = document.getElementById("btn_atualizar");
+        const main = document.getElementById("main");
+        
+        btn_listar.addEventListener("click",gerarLista);
+
+        btn_pesquisar.addEventListener("click",gerarPesquisa);
+
+        btn_atualizar.addEventListener("click",atualizar);
   
       </script>
 </body>
