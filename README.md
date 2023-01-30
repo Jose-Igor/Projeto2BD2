@@ -1,7 +1,7 @@
-# Projeto2BD2
-Projeto usando MongoDB
+# Projeto Banco de Dados II
+Projeto utilizando MongoDB
 
-#### instalar as dependencias npm i
+#### Instalar as dependências npm i
 
-## configuração do .env:
-### CONNECTIONSTRING = "mongodb+srv://<user>:<password>@cluster2132.p7iotwg.mongodb.net/?retryWrites=true&w=majority"
+## Configuração do .env:
+###### CONNECTIONSTRING = "mongodb+srv://<user>:<password>@cluster2132.p7iotwg.mongodb.net/?retryWrites=true&w=majority"
