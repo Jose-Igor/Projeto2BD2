@@ -1,6 +1,5 @@
 # Projeto Banco de Dados II
-Projeto utilizando MongoDB
-Utlizando Mongoose com JavaScript.
+Projeto utilizando MongoDB e Mongoose com JavaScript.
 #### Instalar as dependências npm i
 
 ## Configuração do .env:
