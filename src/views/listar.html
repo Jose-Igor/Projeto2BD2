@@ -270,7 +270,64 @@
             form.appendChild(btn_deletar);
 
         }
+        
+        //função de buscar por texto
+        function gerarPesquisa(){
 
+            btn_listar.addEventListener("click",gerarLista);
+            
+            while(main.firstChild){
+                main.removeChild(main.firstChild);
+            }
+
+            const form = document.createElement("form");
+            form.setAttribute("class","formPesquisa");
+            main.appendChild(form);
+
+            const label = document.createElement("label");
+            label.innerHTML = "Titulo";
+            form.appendChild(label);
+
+            const input = document.createElement("input");
+    
+            input.setAttribute("type","text");
+            input.setAttribute("name","q");
+            input.setAttribute("id","titulo");
+            form.appendChild(input);
+
+            const btn = document.createElement("button");
+            btn.innerHTML="Enviar";
+
+            form.appendChild(btn);
+
+
+            form.addEventListener("submit",(evt)=>{
+                evt.preventDefault();
+
+                
+                    const formData = new FormData(evt.target);
+                    const query = formData.get("q");
+       
+                    fetch("/busca", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ q: query })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        const Anotacao = data[0];
+                        console.log(Anotacao);
+                        if(Anotacao !=undefined){
+                            gerarAnotacao(Anotacao);
+                        }
+                                      
+                    });
+                main.value = "";
+        })
+            
+    }
         
       </script>
 </body>
